@@ -43,8 +43,7 @@ public class PyramidOfDoom {
     }
 
     private City getGeneratedCity() {
-        return generateCity(() ->
-                new City("Noszlop", 8456));
+        return generateCity(citySupplier());
     }
 
     private Supplier<Person> personSupplier() {
