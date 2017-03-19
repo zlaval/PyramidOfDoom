@@ -5,8 +5,6 @@ import com.zlrx.javadevzed.antipattern.pyramidofdoom.pojo.Address;
 import com.zlrx.javadevzed.antipattern.pyramidofdoom.pojo.City;
 import com.zlrx.javadevzed.antipattern.pyramidofdoom.pojo.Person;
 
-import java.util.function.Supplier;
-
 import static com.zlrx.javadevzed.antipattern.pyramidofdoom.generator.AddressGenerator.generateAddress;
 import static com.zlrx.javadevzed.antipattern.pyramidofdoom.generator.CityGenerator.generateCity;
 import static com.zlrx.javadevzed.antipattern.pyramidofdoom.generator.PersonGenerator.generatePerson;
@@ -34,32 +32,16 @@ public class PyramidOfDoom {
     }
 
     public void refactoredExample() {
-        Person person = generatePerson(personSupplier());
-        System.out.println(person);
+        generatePerson(() -> new Person("John Doe", 1990, getGeneratedAddress()));
     }
 
     private Address getGeneratedAddress() {
-        return generateAddress(addressSupplier());
+        return generateAddress(() ->
+                new Address(getGeneratedCity(), "Cool streer", 7));
     }
 
     private City getGeneratedCity() {
-        return generateCity(citySupplier());
+        return generateCity(() -> new City("Noszlop", 8456));
     }
-
-    private Supplier<Person> personSupplier() {
-        return () ->
-                new Person("John Doe", 1990, getGeneratedAddress());
-    }
-
-    private Supplier<Address> addressSupplier() {
-        return () ->
-                new Address(getGeneratedCity(), "Cool streer", 7);
-    }
-
-    private Supplier<City> citySupplier() {
-        return () ->
-                new City("Noszlop", 8456);
-    }
-
 
 }
