@@ -32,7 +32,8 @@ public class PyramidOfDoom {
     }
 
     public void refactoredExample() {
-        generatePerson(() -> new Person("John Doe", 1990, getGeneratedAddress()));
+        Person person = generatePerson(() -> new Person("John Doe", 1990, getGeneratedAddress()));
+        System.out.println(person);
     }
 
     private Address getGeneratedAddress() {
